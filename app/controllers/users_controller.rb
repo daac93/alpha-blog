@@ -27,6 +27,15 @@ class UsersController < ApplicationController
         end
     end
     
+    def show
+    end
+    
+    def destroy
+       @user.destroy
+       flash[:danger] = "Your account has been deleted."
+       redirect_to articles_path
+    end
+    
     private
     def set_user
         @user = User.find(params[:id])
