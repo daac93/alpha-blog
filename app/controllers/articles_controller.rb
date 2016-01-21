@@ -19,7 +19,7 @@ class ArticlesController < ApplicationController
     
     def create
         @article = Article.new(article_params)
-        @article.user = User.first
+        @article.user = current_user
         if @article.save
             flash[:success] = "Article was successfully created"
             redirect_to article_path(@article)
@@ -61,7 +61,7 @@ class ArticlesController < ApplicationController
         
         def require_same_user
            if current_user != @article.user
-               flash[:danger] = "You can only edit your own article"
+               flash[:danger] = "You can only edit your own article."
                redirect_to root_path
            end
         end
